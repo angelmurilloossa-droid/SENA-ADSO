@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+    border: 2px solid hwb(0 99% 1%);
+}
+
+body {
+    padding: 0%;
+    margin: 0%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #7FC0FA;
+}
+
+nav {
+    background-color: #F0FA73;
+}
+
+main {
+    background-color: #603FFF;
+}
+
+section {
+    background-color: #FA2E23;
+}
+
+aside {
+    background-color: #A8120B;
+}
+
+footer {
+    background-color: #607080;
+}
+
+.altura {
+    height: 200px;
+}

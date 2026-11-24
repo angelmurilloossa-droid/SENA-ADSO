@@ -1,0 +1,346 @@
+/* =========================================================
+   CSSLAB — DEMOSTRACIÓN DE PSEUDOCLASES CSS
+   Cada bloque está comentado para identificar la función.
+   ========================================================= */
+
+/* Variables globales: :root selecciona el elemento raíz del documento. */
+:root {
+  color-scheme: light;
+  --ink: #17233b;
+  --muted: #65718a;
+  --paper: #f5f7fc;
+  --card: #ffffff;
+  --line: #e2e8f2;
+  --purple: #6957d9;
+  --blue: #2476d2;
+  --mint: #dff8ee;
+  --radius: 20px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* Selector universal y estilos base. */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); line-height: 1.6; }
+a { color: inherit; }
+button, input, select { font: inherit; }
+code { color: #5b49c7; background: #f0edff; padding: 2px 6px; border-radius: 6px; }
+
+/* Diseño principal. */
+.hero {
+  min-height: 430px; position: relative; overflow: hidden; color: white;
+  background: linear-gradient(120deg, #152448 0%, #303b79 55%, #6652c9 100%);
+  padding: 22px max(6vw, 24px) 75px;
+}
+.nav { display: flex; justify-content: space-between; align-items: center; max-width: 1180px; margin: auto; position: relative; z-index: 2; }
+.brand { text-decoration: none; font-weight: 900; font-size: 1.35rem; letter-spacing: -.05em; }
+.brand span { color: #a8f0d4; }
+.nav-links { display: flex; gap: 22px; }
+.nav-links a { color: #e7eaff; text-decoration: none; font-size: .9rem; }
+.nav-links a:hover { color: #a8f0d4; }
+.hero-content { max-width: 1180px; margin: 75px auto 0; position: relative; z-index: 1; }
+.eyebrow { color: #8b79ef; font-size: .72rem; font-weight: 800; letter-spacing: .15em; margin: 0 0 8px; }
+.hero .eyebrow { color: #a8f0d4; }
+h1 { max-width: 700px; font-size: clamp(2.7rem, 6vw, 5rem); line-height: 1.04; letter-spacing: -.055em; margin: 10px 0 18px; }
+h1 span { color: #a8f0d4; }
+.hero-copy { max-width: 620px; color: #dce3ff; font-size: 1.05rem; }
+.hero-orb { position: absolute; border-radius: 50%; background: #a8f0d4; opacity: .12; }
+.orb-one { width: 300px; height: 300px; right: 10%; top: 80px; }
+.orb-two { width: 130px; height: 130px; right: 27%; bottom: -60px; }
+
+/* Botones: :hover, :active y :focus-visible se muestran en controles. */
+.primary-button, .secondary-button, .demo-button {
+  display: inline-flex; align-items: center; gap: 10px; border: 0; border-radius: 12px;
+  padding: 12px 18px; background: var(--purple); color: white; text-decoration: none;
+  font-weight: 750; cursor: pointer; transition: transform .18s, box-shadow .18s, background .18s;
+}
+.hero .primary-button { background: #a8f0d4; color: #17233b; margin-top: 12px; }
+.primary-button:hover, .secondary-button:hover, .demo-button:hover { transform: translateY(-2px); box-shadow: 0 9px 22px #263a6625; }
+.primary-button:active, .secondary-button:active, .demo-button:active { transform: translateY(1px) scale(.98); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible {
+  outline: 3px solid #f3b84b; outline-offset: 3px;
+}
+
+/* Contenedor y tarjetas. */
+.container { max-width: 1180px; padding: 0 24px; margin: -30px auto 0; position: relative; z-index: 2; }
+.panel, .demo-card, .mini-card, .note-card, .type-demo, .details-demo {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: 0 12px 35px #1a2c4b0a;
+}
+.intro { display: flex; justify-content: space-between; align-items: center; gap: 25px; padding: 28px 32px; }
+h2 { font-size: clamp(1.6rem, 3vw, 2.25rem); line-height: 1.15; letter-spacing: -.04em; margin: 0 0 8px; }
+.intro p:last-child { color: var(--muted); margin-bottom: 0; }
+.code-chip { white-space: nowrap; background: #17233b; color: white; border-radius: 12px; padding: 15px 18px; font: 700 .95rem Consolas, monospace; }
+.code-chip span { color: #a8f0d4; }
+.section { padding: 70px 0 0; scroll-margin-top: 25px; }
+.section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 22px; }
+.section-heading > p { color: var(--muted); max-width: 420px; margin: 0; }
+.demo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.demo-card, .mini-card { padding: 22px; min-width: 0; }
+.demo-card h3, .mini-card h3, .note-card h3, .type-demo h3 { margin: 12px 0 8px; font-size: 1.05rem; }
+.demo-card p, .mini-card p { color: var(--muted); font-size: .9rem; }
+.tag { display: inline-block; color: #5b49c7; background: #f0edff; padding: 4px 9px; border-radius: 99px; font: 700 .75rem Consolas, monospace; }
+.demo-button { margin-top: 10px; }
+.hover-demo:hover { background: #1b9b78; }
+.active-demo:active { background: #bd5d34; }
+.focus-demo { display: inline-block; padding: 10px; border: 1px solid var(--line); border-radius: 9px; margin-top: 10px; }
+.focus-demo:focus { background: #fff2cf; }
+.focus-demo:focus-visible { outline: 3px dashed #d48b20; }
+.focus-parent { transition: border .2s, box-shadow .2s; }
+.focus-parent:focus-within { border-color: var(--purple); box-shadow: 0 0 0 4px #6957d91b; }
+label { display: grid; gap: 7px; font-size: .9rem; font-weight: 650; }
+input, select { min-width: 0; width: 100%; border: 1px solid #cfd7e5; border-radius: 9px; padding: 10px 12px; background: white; color: var(--ink); }
+input::placeholder { color: #9aa4b5; }
+
+/* :required / :optional: campos obligatorios y opcionales. */
+input:required { border-left: 4px solid #d69a32; }
+input:optional { border-left: 4px solid #aab4c5; }
+
+/* :valid / :invalid: estado de validación del navegador. */
+input:valid { border-color: #239b72; }
+input:invalid:not(:placeholder-shown) { border-color: #d45c64; background: #fff8f8; }
+
+/* :in-range / :out-of-range: valores dentro o fuera de min y max. */
+input:in-range { box-shadow: inset 0 0 0 1px #239b7240; }
+input:out-of-range { background: #fff0f0; border-color: #d45c64; }
+
+/* :read-only / :read-write: campos editables o de solo lectura. */
+input:read-only { background: #edf1f7; color: #68748a; }
+input:read-write { cursor: text; }
+
+/* :placeholder-shown: el campo todavía muestra el placeholder. */
+input:placeholder-shown { background-image: linear-gradient(90deg, #fff, #fbfaff); }
+
+/* :enabled / :disabled: controles disponibles o deshabilitados. */
+input:enabled, select:enabled { opacity: 1; }
+input:disabled { cursor: not-allowed; background: #e9edf3; opacity: .65; }
+
+/* :checked: opción marcada. */
+input[type="checkbox"]:checked { accent-color: #6957d9; }
+.check-row { display: flex; align-items: center; gap: 10px; }
+.check-row input { width: auto; }
+.check-row:has(input:checked) { color: #21805f; }
+
+/* :default: control marcado por defecto en su grupo/formulario. */
+input:default { outline-offset: 2px; }
+
+/* :indeterminate: estado intermedio; se activa en JS para una casilla compatible. */
+input:indeterminate { outline: 2px dashed #d69a32; }
+
+/* :user-valid / :user-invalid: validez tras interacción del usuario. */
+input:user-valid { box-shadow: 0 0 0 2px #239b7220; }
+input:user-invalid { box-shadow: 0 0 0 2px #d45c6420; }
+
+/* :autofill: el navegador rellenó el campo automáticamente. */
+input:autofill { border-color: #6957d9; }
+
+/* :blank: pseudoclase de campos en especificaciones recientes; puede no estar soportada.
+   Se protege con @supports para que navegadores antiguos ignoren la regla. */
+@supports selector(input:blank) {
+  input:blank { border-style: dashed; }
+}
+
+.form-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 18px; align-items: start; }
+.demo-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 24px; background: white; border: 1px solid var(--line); border-radius: var(--radius); }
+.demo-form label:nth-child(3), .demo-form label:nth-child(4), .demo-form .check-row, .demo-form button, .form-message { grid-column: 1 / -1; }
+.form-message { margin: 0; color: var(--muted); font-size: .85rem; }
+.note-card { padding: 25px; }
+.note-card li { margin: 8px 0; color: var(--muted); }
+
+/* :first-child, :last-child y :nth-child(): posición entre todos los hermanos. */
+.list-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding: 25px; }
+.number-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; counter-reset: demo; }
+.number-list li { padding: 10px 14px; background: #f2f4fa; border-radius: 9px; counter-increment: demo; }
+.number-list li::before { content: counter(demo) ". "; font-weight: 800; color: var(--purple); }
+.number-list li:first-child { background: #e4f8ef; font-weight: 800; }
+.number-list li:last-child { border: 2px solid #6957d9; }
+.number-list li:nth-child(odd) { box-shadow: inset 4px 0 #a8f0d4; }
+.number-list li:nth-last-child(2) { color: #9a5c18; }
+.structure-explain p { margin: 6px 0; color: var(--muted); }
+
+/* :only-child: coincide cuando un elemento es el único hijo de su padre. */
+.single-child { padding: 18px; margin-top: 15px; border: 1px dashed #aab4c5; border-radius: 14px; }
+.single-child span:only-child { display: block; background: var(--mint); padding: 12px; border-radius: 9px; }
+
+/* :first-of-type, :last-of-type y :nth-of-type(): cuentan solo elementos de igual etiqueta. */
+.type-demo { margin-top: 15px; padding: 24px; }
+.type-demo p:first-of-type { color: #20805f; font-weight: 800; }
+.type-demo p:last-of-type { color: #6957d9; font-weight: 800; }
+.type-demo p:nth-of-type(2) { text-decoration: underline; }
+
+/* :only-of-type: selecciona el único elemento de su tipo entre hermanos. */
+.type-demo div:only-of-type { background: #fff2cf; padding: 8px; border-radius: 8px; }
+
+/* :empty: selecciona elementos sin nodos hijos. */
+.empty-example:empty { display: none; }
+
+/* :is(): agrupa encabezados de tarjetas con una sola regla. */
+:is(.demo-card, .mini-card) h3 { letter-spacing: -.02em; }
+
+/* :where(): agrupa elementos sin aumentar especificidad. */
+:where(.language-panel, .note-card) a { text-decoration-thickness: 2px; }
+
+/* :not(): excluye la tarjeta marcada como .excluded. */
+.mini-card:not(.excluded) { border-top: 4px solid #a8f0d4; }
+.mini-card.excluded { opacity: .65; }
+
+/* :has(): aplica estilo al contenedor que contiene un elemento coincidente. */
+.has-demo:has(p) { background: #f0edff; border-color: #b8aef4; }
+
+/* :lang(): estilos dependientes del idioma del elemento. */
+:lang(es) { quotes: "«" "»"; }
+.language-panel { padding: 20px; margin-top: 16px; }
+.language-panel p:lang(es)::before { content: "ES · "; color: #239b72; font-weight: 800; }
+
+/* :dir(): selecciona dirección del texto. */
+.language-panel p:dir(rtl) { text-align: right; background: #f5f2ff; padding: 12px; border-radius: 8px; }
+
+/* :any-link y :link: enlaces con destino y enlaces no visitados. */
+:any-link { text-underline-offset: 3px; }
+a:link { color: #4f45b5; }
+
+/* :visited: por privacidad, los navegadores limitan las propiedades que puede cambiar. */
+a:visited { color: #7653a6; }
+
+/* :target: sección cuyo id coincide con el fragmento de la URL. */
+section:target { outline: 3px solid #a8f0d4; outline-offset: 8px; }
+
+/* :scope: referencia al ámbito de selección; aquí se muestra como selector raíz del bloque. */
+.language-panel:scope { scroll-margin-top: 20px; }
+
+/* :open: controles que están abiertos, como details. */
+details[open] { border-color: #6957d9; }
+details:open { background: #f7f5ff; }
+.details-demo { padding: 20px; margin-bottom: 14px; }
+summary { cursor: pointer; font-weight: 800; }
+details p { color: var(--muted); }
+
+/* :popover-open: popover que se encuentra visible. */
+[popover] { border: 1px solid var(--line); border-radius: 14px; padding: 22px; box-shadow: 0 18px 50px #17233b25; }
+[popover]:popover-open { border-color: var(--purple); }
+
+/* :modal: diálogo mostrado en estado modal. */
+dialog { border: 0; border-radius: 18px; padding: 28px; box-shadow: 0 20px 70px #17233b40; }
+dialog:modal { outline: 3px solid #a8f0d4; }
+dialog::backdrop { background: #101a32a8; }
+
+/* :fullscreen: elemento que ocupa la pantalla completa. */
+:fullscreen { background: #17233b; color: white; }
+
+/* :picture-in-picture: video que se reproduce en ventana flotante. */
+video:picture-in-picture { outline: 3px solid #a8f0d4; }
+
+/* :root, :empty y otras reglas de estructura pueden aplicarse sin cambiar el HTML. */
+.reference-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.reference-item { display: grid; gap: 8px; padding: 16px; background: white; border: 1px solid var(--line); border-radius: 13px; }
+.reference-item span { color: var(--muted); font-size: .85rem; }
+.footer { display: flex; justify-content: space-between; max-width: 1180px; margin: 80px auto 0; padding: 25px 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+
+/* :local-link: selector definido para enlaces locales; no está implementado de forma general.
+   Se incluye protegido para que no afecte a navegadores que no lo reconozcan. */
+@supports selector(a:local-link) {
+  a:local-link { text-decoration-style: double; }
+}
+
+/* :heading y :heading(): pseudoclases recientes para seleccionar encabezados.
+   Se protegen con @supports por compatibilidad. */
+@supports selector(:heading) {
+  :heading { text-wrap: balance; }
+}
+@supports selector(:heading(2)) {
+  :heading(2) { text-decoration-color: #a8f0d4; }
+}
+
+/* :host, :host(), :host-context() y :state() solo tienen sentido dentro de Shadow DOM
+   o en componentes personalizados; se documentan aquí como ejemplos de sintaxis. */
+/*
+:host { display: block; }
+:host(.dark) { color: white; }
+:host-context(.theme-dark) { background: #17233b; }
+:state(expanded) { border-color: green; }
+*/
+
+/* :has-slotted solo aplica al elemento slot dentro de un Shadow DOM. */
+/*
+slot:has-slotted { padding: 1rem; }
+*/
+
+/* :current, :past y :future se utilizan en contextos de contenido temporal como WebVTT. */
+/*
+::cue(:current) { color: yellow; }
+::cue(:past) { opacity: .5; }
+::cue(:future) { color: white; }
+*/
+
+/* Pseudoclases de reproducción multimedia: dependen del estado real del medio. */
+video:playing { outline: 2px solid #239b72; }
+video:paused { outline: 2px solid #d69a32; }
+video:seeking { opacity: .7; }
+video:buffering { cursor: progress; }
+video:stalled { filter: grayscale(1); }
+video:muted { border-color: #d69a32; }
+video:volume-locked { cursor: not-allowed; }
+
+/* Pseudoclases de páginas impresas: solo funcionan dentro de @page. */
+@page :first { margin-top: 2cm; }
+@page :left { margin-left: 2.5cm; margin-right: 1.5cm; }
+@page :right { margin-left: 1.5cm; margin-right: 2.5cm; }
+@page :blank { @top-center { content: "Página en blanco"; } }
+
+/* Transiciones de vista: reglas para documentos que implementen View Transitions. */
+@supports selector(:active-view-transition) {
+  :root:active-view-transition { cursor: progress; }
+}
+@supports selector(:active-view-transition-type(forward)) {
+  :root:active-view-transition-type(forward) { scroll-behavior: auto; }
+}
+
+/* Pseudoclases de marcadores de desplazamiento: dependen de scroll markers. */
+@supports selector(:target-current) {
+  :target-current { font-weight: 900; }
+}
+@supports selector(:target-before) {
+  :target-before { opacity: .7; }
+}
+@supports selector(:target-after) {
+  :target-after { opacity: .85; }
+}
+
+/* Pseudoclases de interés: funciones recientes para interacciones de interés. */
+@supports selector(:interest-source) {
+  :interest-source { outline: 2px solid #6957d9; }
+}
+@supports selector(:interest-target) {
+  :interest-target { box-shadow: 0 0 0 3px #a8f0d4; }
+}
+
+/* :xr-overlay: contexto de superposición de experiencias XR; soporte específico. */
+@supports selector(:xr-overlay) {
+  :xr-overlay { color: white; }
+}
+
+/* :blank en @page ya aparece arriba; la pseudoclase de campo tiene soporte diferente.
+   :autofill y otras pseudoclases pueden variar según el navegador. */
+
+/* Diseño adaptable para pantallas pequeñas. */
+@media (max-width: 900px) {
+  .demo-grid { grid-template-columns: repeat(2, 1fr); }
+  .reference-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px) {
+  .nav { align-items: flex-start; gap: 14px; flex-direction: column; }
+  .nav-links { flex-wrap: wrap; gap: 12px; }
+  .hero-content { margin-top: 55px; }
+  .intro, .section-heading, .list-demo { display: block; }
+  .code-chip { display: inline-block; margin-top: 18px; }
+  .demo-grid, .form-layout, .demo-form, .reference-grid { grid-template-columns: 1fr; }
+  .demo-form label, .demo-form button, .form-message { grid-column: auto; }
+  .section-heading > p { margin-top: 12px; }
+  .footer { gap: 12px; flex-direction: column; }
+}
+@media print {
+  body { background: white; }
+  .hero { min-height: auto; padding-bottom: 25px; }
+  .container { margin: 0 auto; }
+  .primary-button, .secondary-button { display: none; }
+}

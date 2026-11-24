@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Demostración práctica de pseudoclases CSS.">
+  <title>Laboratorio de pseudoclases CSS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- :target: el enlace del menú lleva a esta sección y permite resaltarla. -->
+  <header class="hero" id="inicio">
+    <nav class="nav" aria-label="Navegación principal">
+      <a class="brand" href="#inicio">CSS<span>Lab</span></a>
+      <div class="nav-links">
+        <a href="#interaccion">Interacción</a>
+        <a href="#formularios">Formularios</a>
+        <a href="#estructura">Estructura</a>
+        <a href="#selectores">Selectores</a>
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <p class="eyebrow">GUÍA INTERACTIVA · HTML + CSS</p>
+      <h1>Explora las <span>pseudoclases</span> de CSS</h1>
+      <p class="hero-copy">
+        Una demostración visual de estados, posiciones, relaciones y condiciones
+        que permiten seleccionar elementos sin agregar clases adicionales al HTML.
+      </p>
+      <a class="primary-button" href="#interaccion">Comenzar recorrido <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="hero-orb orb-one" aria-hidden="true"></div>
+    <div class="hero-orb orb-two" aria-hidden="true"></div>
+  </header>
+
+  <main class="container">
+    <section class="intro panel">
+      <div>
+        <p class="eyebrow">¿CÓMO SE ESCRIBEN?</p>
+        <h2>Una condición, dos puntos</h2>
+        <p>Una pseudoclase comienza con <code>:</code>. Por ejemplo, <code>button:hover</code>
+          selecciona un botón cuando el puntero está encima.</p>
+      </div>
+      <div class="code-chip">button<span>:hover</span> { … }</div>
+    </section>
+
+    <!-- Pseudoclases de interacción del usuario -->
+    <section class="section" id="interaccion">
+      <div class="section-heading">
+        <div><p class="eyebrow">01 · INTERACCIÓN</p><h2>Prueba los estados</h2></div>
+        <p>Pasa el cursor, haz clic o usa la tecla Tab para notar los cambios.</p>
+      </div>
+      <div class="demo-grid">
+        <article class="demo-card">
+          <span class="tag">:hover</span>
+          <h3>Pasa el cursor</h3>
+          <button class="demo-button hover-demo">Pasa el cursor aquí</button>
+          <p>El botón cambia cuando el puntero está encima.</p>
+        </article>
+        <article class="demo-card">
+          <span class="tag">:active</span>
+          <h3>Mantén presionado</h3>
+          <button class="demo-button active-demo">Mantén presionado</button>
+          <p>El estilo aparece mientras se activa el botón.</p>
+        </article>
+        <article class="demo-card">
+          <span class="tag">:focus / :focus-visible</span>
+          <h3>Enfoca con teclado</h3>
+          <a class="focus-demo" href="#formularios">Usa Tab para llegar aquí</a>
+          <p>El foco visible ayuda a navegar sin ratón.</p>
+        </article>
+        <article class="demo-card focus-parent">
+          <span class="tag">:focus-within</span>
+          <h3>Enfoca dentro del panel</h3>
+          <label>Tu nombre <input type="text" placeholder="Haz clic aquí"></label>
+          <p>El panel se resalta cuando un descendiente recibe el foco.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Pseudoclases de formularios y controles -->
+    <section class="section" id="formularios">
+      <div class="section-heading">
+        <div><p class="eyebrow">02 · FORMULARIOS</p><h2>Estados de los campos</h2></div>
+        <p>Completa los campos para comprobar validación, obligatoriedad y edición.</p>
+      </div>
+      <div class="form-layout">
+        <form class="demo-form" id="demo-form">
+          <label>Correo obligatorio
+            <input type="email" required placeholder="nombre@correo.com">
+          </label>
+          <label>Edad (18 a 99)
+            <input type="number" min="18" max="99" placeholder="Ej. 25">
+          </label>
+          <label>Campo opcional
+            <input type="text" placeholder="Este campo es opcional">
+          </label>
+          <label>Solo lectura
+            <input type="text" value="Este valor no se puede editar" readonly>
+          </label>
+          <label class="check-row"><input type="checkbox" checked> Acepto la demostración</label>
+          <label class="check-row"><input type="checkbox" disabled> Opción deshabilitada</label>
+          <label>Selecciona una opción
+            <select>
+              <option value="">Elige una opción</option>
+              <option selected>Primera opción</option>
+              <option>Segunda opción</option>
+            </select>
+          </label>
+          <button class="primary-button" type="submit">Probar formulario</button>
+          <p class="form-message" id="form-message" aria-live="polite">Los estilos de validación se aplican según el estado del campo.</p>
+        </form>
+        <aside class="note-card">
+          <h3>¿Qué puedes observar?</h3>
+          <ul>
+            <li><code>:required</code> y <code>:optional</code></li>
+            <li><code>:valid</code> y <code>:invalid</code></li>
+            <li><code>:in-range</code> y <code>:out-of-range</code></li>
+            <li><code>:checked</code>, <code>:disabled</code> y <code>:enabled</code></li>
+            <li><code>:read-only</code> y <code>:read-write</code></li>
+            <li><code>:placeholder-shown</code></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Pseudoclases estructurales -->
+    <section class="section" id="estructura">
+      <div class="section-heading">
+        <div><p class="eyebrow">03 · ESTRUCTURA</p><h2>La posición sí importa</h2></div>
+        <p>Los selectores estructurales identifican elementos por su lugar entre hermanos.</p>
+      </div>
+      <div class="list-demo panel">
+        <ol class="number-list">
+          <li>Primer elemento</li><li>Segundo elemento</li><li>Tercer elemento</li>
+          <li>Cuarto elemento</li><li>Quinto elemento</li><li>Sexto elemento</li>
+        </ol>
+        <div class="structure-explain">
+          <p><code>:first-child</code> resalta el primero.</p>
+          <p><code>:last-child</code> resalta el último.</p>
+          <p><code>:nth-child(odd)</code> resalta posiciones impares.</p>
+          <p><code>:only-child</code> se demuestra en el bloque de abajo.</p>
+        </div>
+      </div>
+      <div class="single-child"><span>Único elemento dentro de este contenedor (:only-child)</span></div>
+      <div class="type-demo">
+        <h3>Prueba por tipo de etiqueta</h3>
+        <p>Primer párrafo del ejemplo.</p>
+        <div>Un contenedor entre párrafos.</div>
+        <p>Segundo párrafo del ejemplo.</p>
+        <p>Último párrafo del ejemplo.</p>
+      </div>
+    </section>
+
+    <!-- Pseudoclases funcionales y relacionales -->
+    <section class="section" id="selectores">
+      <div class="section-heading">
+        <div><p class="eyebrow">04 · SELECTORES</p><h2>Seleccionar con condiciones</h2></div>
+        <p>Estas pseudoclases permiten agrupar, excluir o relacionar selectores.</p>
+      </div>
+      <div class="demo-grid">
+        <article class="mini-card"><span class="tag">:is()</span><h3>Grupo de selectores</h3><p>Este título y los títulos de otras tarjetas comparten una regla.</p></article>
+        <article class="mini-card"><span class="tag">:where()</span><h3>Grupo sin especificidad</h3><p>Permite agrupar selectores sin aumentar su especificidad.</p></article>
+        <article class="mini-card excluded"><span class="tag">:not()</span><h3>Exclusión</h3><p>Esta tarjeta queda excluida de una regla de ejemplo.</p></article>
+        <article class="mini-card has-demo"><span class="tag">:has()</span><h3>Relación padre-hijo</h3><p>El contenedor se destaca porque contiene este texto.</p></article>
+      </div>
+      <div class="language-panel panel">
+        <p lang="es">Este texto está marcado como español (:lang()).</p>
+        <p dir="rtl">هذا مثال على اتجاه الكتابة من اليمين إلى اليسار (:dir(rtl)).</p>
+        <a href="#estructura">Enlace interno (:any-link, :link y :target)</a>
+      </div>
+    </section>
+
+    <!-- Estados de visualización y elementos interactivos -->
+    <section class="section">
+      <div class="section-heading">
+        <div><p class="eyebrow">05 · COMPONENTES</p><h2>Elementos desplegables</h2></div>
+        <p>Abre los controles para comprobar <code>:open</code> y <code>:popover-open</code>.</p>
+      </div>
+      <details class="details-demo">
+        <summary>Abre este contenido (:open)</summary>
+        <p>El elemento details está abierto. La pseudoclase :open permite reconocer ese estado.</p>
+      </details>
+      <button class="primary-button" popovertarget="sample-popover">Mostrar popover</button>
+      <div id="sample-popover" popover>
+        <strong>Popover abierto</strong>
+        <p>Este elemento coincide con <code>:popover-open</code>.</p>
+        <button popovertarget="sample-popover" popovertargetaction="hide">Cerrar</button>
+      </div>
+      <dialog id="sample-dialog">
+        <p>Diálogo modal: puede coincidir con <code>:modal</code>.</p>
+        <button id="close-dialog" class="primary-button">Cerrar diálogo</button>
+      </dialog>
+      <button id="open-dialog" class="secondary-button">Abrir diálogo modal</button>
+      <video class="video-placeholder" controls muted>
+        <source src="" type="video/mp4">
+        Tu navegador no puede reproducir un video de ejemplo porque no se ha añadido un archivo multimedia.
+      </video>
+    </section>
+
+    <!-- Sección de referencia: pseudoclases no visibles en todos los navegadores -->
+    <section class="section" id="referencia">
+      <div class="section-heading">
+        <div><p class="eyebrow">06 · REFERENCIA</p><h2>Pseudoclases de contextos especiales</h2></div>
+        <p>Se incluyen reglas comentadas para pseudoclases que requieren impresión, multimedia, Shadow DOM, WebVTT u otras API.</p>
+      </div>
+      <div class="reference-grid">
+        <div class="reference-item"><code>:visited</code><span>Enlaces visitados (con restricciones de privacidad).</span></div>
+        <div class="reference-item"><code>:local-link</code><span>Enlaces locales; soporte limitado.</span></div>
+        <div class="reference-item"><code>:defined</code><span>Elementos definidos y componentes personalizados.</span></div>
+        <div class="reference-item"><code>:host()</code><span>Elemento anfitrión de Shadow DOM.</span></div>
+        <div class="reference-item"><code>:current</code><span>Contenido temporal sincronizado.</span></div>
+        <div class="reference-item"><code>:past / :future</code><span>Partes anteriores o posteriores de contenido temporal.</span></div>
+        <div class="reference-item"><code>:fullscreen</code><span>Elemento en pantalla completa.</span></div>
+        <div class="reference-item"><code>:picture-in-picture</code><span>Multimedia en ventana flotante.</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>CSSLab · Laboratorio educativo de pseudoclases CSS</p>
+    <a href="#inicio">Volver al inicio ↑</a>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
